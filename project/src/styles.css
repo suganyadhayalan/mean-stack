@@ -2,3 +2,27 @@
 /*@import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
 */
+
+
+
+input[type=text].invalid-textbox,input[type=password].invalid-textbox{
+    border-bottom: 2px solid #ed5558;
+    }
+label.validation-message{
+    color:#ed5558;
+}    
+
+.alert {
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
+  }
+  
+  .success{
+    padding: 20px;
+    background-color:#249424; /* Green */
+    color: white;
+    margin-bottom: 15px;
+  }
+

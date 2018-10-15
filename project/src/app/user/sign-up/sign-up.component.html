@@ -1,30 +1,61 @@
-<form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)">
-    <input type="text" #fullName="ngModel" [(ngModel)]="userService.selectedUser.fullName" name="fullName" placeholder="Full Name"
-    required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !fullName.valid }">
-    <div *ngIf="signUpForm.submitted && !fullName.valid">
-      <label class="validation-message">This field is required.</label>
+﻿<div class="jumbotron">
+    <div class="class heading">
+      <h1>Sign-UP</h1>
     </div>
-    <input type="text" #email="ngModel" [(ngModel)]="userService.selectedUser.email" name="email" placeholder="Email"
-    required [pattern]="emailRegex"  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !email.valid }">
-    <div *ngIf="signUpForm.submitted && email.errors">
-      <label *ngIf="email.errors.required" class="validation-message">This field is required.</label>
-      <label *ngIf="email.errors.pattern" class="validation-message">Invalid email address.</label>
-    </div>
-    <input type="password" #password="ngModel" [(ngModel)]="userService.selectedUser.password" name="password" placeholder="Password"
-    minlength="4" required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !password.valid }">
-    <div *ngIf="signUpForm.submitted && password.errors">
-      <label *ngIf="password.errors.required" class="validation-message">This field is required.</label>
-      <label *ngIf="password.errors.minlength" class="validation-message">Enter atleast 4 characters.</label>
-    </div>
-    <input type="submit" value="Sign Up">
-  </form>
+    <form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)" autocomplete="off">
+      <div class="form-group row">
+        <label for="text-input" class="col-2 col-form-lable">UserName:</label>
+        <div class="col-4">
+          <input type="text" minlength=4 maxlength=10 required pattern="[a-zA-Z0-9_]+" class="form-control" #fullName="ngModel" [(ngModel)]="userService.selectedUser.fullName" name="fullName" placeholder="Username" required [ngClass]="{ 'invalid-textbox' :signUpForm.submitted && !fullName.valid }">
+          <div *ngIf="signUpForm.submitted && !fullName.valid">
+            <label class="validation-message">This field is required.</label>
+            <label *ngIf="fullName.errors.minlength" class="validation-message">Enter atleast 4 characters.</label>
+            <label *ngIf="fullName.errors.maxlength" class="validation-message">Maximum length 10 characters.</label>
+            <label *ngIf="fullName.errors.pattern" class="validation-message">Username should be alphanumberic characters and underscore.</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="text-input" class="col-2 col-form-label">Project-Name:</label>
+        <div class="col-4">
+          <input type="text"minlength=3 maxlength=15 required pattern="[a-zA-Z0-9,.-_&]+" class="form-control" #projectName="ngModel" [(ngModel)]="userService.selectedUser.projectName" name="projectName" placeholder="ProjectName" required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !projectName.valid }">
+          <div *ngIf="signUpForm.submitted && !projectName.valid">
+            <label class="validation-message">THis field is required.</label>
+            <label *ngIf="projectName.errors.minlength" class="validation-message">Enter atleast 3 characters.</label>
+            <label *ngIf="projectName.errors.maxlength" class="validation-message">Maximum length 15 characters.</label>
+            <label *ngIf="projectName.errors.pattern" class="validation-message">ProjectName should be alphanumberic characters and few special characters(& , ._ -) only.</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="email-input" class="col-2 col-form-label">Email:</label>
+        <div class="col-4">
+          <input type="text" class="form-control" #email="ngModel" [(ngModel)]="userService.selectedUser.email" name="email" placeholder="example@example.com" required [pattern]="emailRegex" [ngClass]="{ 'invalid-textbox' :signUpForm.submitted && !email.valid }">
+          <div *ngIf="signUpForm.submitted && email.errors">
+            <label *ngIf="email.errors.required" class="validation-message">This field is required.</label>
+            <label *ngIf="email.errors.pattern" class="validation-message">Invalid email address.</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="password-input" class="col-2 col-form-label">Password:</label>
+        <div class="col-4">
+          <input type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" #password="ngModel" [(ngModel)]="userService.selectedUser.password" name="password" placeholder="********" minlength="4" required [ngClass]="{ 'invalid-textbox' :signUpForm.submitted && !password.valid }">
+          <div *ngIf="signUpForm.submitted && password.errors">
+            <label *ngIf="password.errors.required" class="validation-message">This field is required.</label>
+            <label *ngIf="password.errors.minlength" class="validation-message">Enter atleast 4 characters.</label>
+            <label *ngIf="password.errors.pattern" class="validation-message">at least 1 uppercase character (A-Z)
+              at least 1 lowercase character (a-z)
+              at least 1 digit (0-9)
+              </label>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-primary mb-2" value="Submit">Create Account</button>
+      </div>
+
+     
+    </form>
   
-  <!-- Success message -->
-  <div class="success" *ngIf="showSucessMessage">
-    Saved successfully
-  </div>
-  
-  <!-- Error message -->
-  <div class="alert" *ngIf="serverErrorMessages">
-    {{serverErrorMessages}}
   </div>
