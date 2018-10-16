@@ -20,7 +20,7 @@
         <div class="col-4">
           <input type="text"minlength=3 maxlength=15 required pattern="[a-zA-Z0-9,.-_&]+" class="form-control" #projectName="ngModel" [(ngModel)]="userService.selectedUser.projectName" name="projectName" placeholder="ProjectName" required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !projectName.valid }">
           <div *ngIf="signUpForm.submitted && !projectName.valid">
-            <label class="validation-message">THis field is required.</label>
+            <label class="validation-message">This field is required.</label>
             <label *ngIf="projectName.errors.minlength" class="validation-message">Enter atleast 3 characters.</label>
             <label *ngIf="projectName.errors.maxlength" class="validation-message">Maximum length 15 characters.</label>
             <label *ngIf="projectName.errors.pattern" class="validation-message">ProjectName should be alphanumberic characters and few special characters(& , ._ -) only.</label>
@@ -57,5 +57,13 @@
 
      
     </form>
+    <div class="success" *ngIf="showSuccessMessage">save successfully</div>
+
+  <div class="alert" *ngIf="serverErrorMessages">{{serverErrorMessages}}</div>
+
   
   </div>
+  
+
+
+

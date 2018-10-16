@@ -12,9 +12,9 @@ import { User } from './user.model';
 export class UserService {
   selectedUser: User = {
     fullName: '',
+    projectName:'',
     email: '',
-    password:'',
-    projectName:''
+    password:''
   };
 
   constructor(private http: HttpClient) { }

@@ -9,16 +9,16 @@ var userSchema = new mongoose.Schema({
         minlength : [4, 'fullname must be atleast 4 character long'],
         maxlength : [10, 'maximum length below 10 character long']
     },
-    email: {
-        type: String,
-        required: 'Email can\'t be empty',
-        unique: true
-    },
     projectName: {
         type: String,
         required: 'Project name can\'t be empty',
         minlength : [3, 'projectname must be atleast 3 character long'],
         maxlength : [15, 'maximum length']
+    },
+    email: {
+        type: String,
+        required: 'Email can\'t be empty',
+        unique: true
     },
     password: {
         type: String,
@@ -26,7 +26,7 @@ var userSchema = new mongoose.Schema({
         minlength : [4,'Password must be atleast 4 character long'],
         maxlength : [15]
     },
-   // saltSecret: String
+   saltSecret: String
 });
 
 // Custom validation for email
@@ -35,13 +35,14 @@ userSchema.path('email').validate((val) => {
     return emailRegex.test(val);
 }, 'Invalid e-mail.');
 
+/*
 userSchema.path('password').validate((val) => {
 
-    passwordregex= "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,128}" ;
+    passwordregex= "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}" ;
     return passwordregex.test(val);
 }, 'invalid password pattern');
 
-
+*/
 /*
 function generateSalt() {
     //return Math.round((new Date().valueOf() * Math.random())) + '';
@@ -66,7 +67,7 @@ userSchema.pre('save', function(next)
 
 */
 
-/*
+
 userSchema.pre('save', function (next) {
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(this.password, salt, (err, hash) => {
@@ -76,6 +77,6 @@ userSchema.pre('save', function (next) {
         });
     });
 });
-*/
+
 
 mongoose.model('User', userSchema);

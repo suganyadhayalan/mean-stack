@@ -54,9 +54,9 @@ onSubmit(form : NgForm){
 resetForm(form: NgForm){
   this.userService.selectedUser = {
     fullName: '',
+    projectName:'',
     email: '',
     password:'',
-    projectName:''
   };
   form.resetForm();
   this.serverErrorMessages= '';

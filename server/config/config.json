@@ -1,11 +1,11 @@
 { 
     "development":{
         "PORT": 3000,
-        "MONGODB_URI": "mongodb://localhost:27017/db1"
+        "MONGODB_URI": "mongodb://localhost:27017/signup"
     },
     "production": {
         "PORT": 3000,
-        "MONGODB_URI": "mongodb://xxxxx/db1" 
+        "MONGODB_URI": "mongodb://xxxxx/signup" 
     }
    
 }
