@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 //build in module mongoose 
 
-const User = mongoose.model('User'); 
+const User = mongoose.model('User'); //userscheme to be import
 
 //register fucntion  help to store the data in database
 

@@ -1,7 +1,7 @@
 // give the path to the router
 
 const express = require('express');
-const router = express.Router();
+const router = express.Router();//configure the router inside the application
 
 const ctrlUser = require('../controllers/user.controller');
 

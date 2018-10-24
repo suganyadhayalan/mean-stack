@@ -1,19 +1,20 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const crypto = require('crypto');
+SALT_WORK_FACTOR = 10;
+//const crypto = require('crypto');
 
 var userSchema = new mongoose.Schema({
     fullName: {
         type: String,
         required: 'Full name can\'t be empty',
         minlength : [4, 'fullname must be atleast 4 character long'],
-        maxlength : [10, 'maximum length below 10 character long']
+        maxlength : [20, 'maximum length below 20 character long']
     },
     projectName: {
         type: String,
         required: 'Project name can\'t be empty',
         minlength : [3, 'projectname must be atleast 3 character long'],
-        maxlength : [15, 'maximum length']
+        maxlength : [20, 'maximum length']
     },
     email: {
         type: String,
@@ -23,10 +24,10 @@ var userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: 'Password can\'t be empty',
-        minlength : [4,'Password must be atleast 4 character long'],
-        maxlength : [15]
-    },
-   saltSecret: String
+        minlength : [8,'Password must be atleast 8 character long'],
+        maxlength : [20]
+    }
+  // saltSecret: String
 });
 
 // Custom validation for email
@@ -35,48 +36,42 @@ userSchema.path('email').validate((val) => {
     return emailRegex.test(val);
 }, 'Invalid e-mail.');
 
-/*
+userSchema.path('fullName').validate((val) => {
+    //fullNameregex = /^[a-zA-Z0-9_]+$/;
+    fullNameregex = /^([a-zA-Z0-9_]+)$/;
+    return fullNameregex.test(val);
+}, 'Invalid Username.');
+
+userSchema.path('projectName').validate((val) => {
+    //projectNameregex = /^[a-zA-Z0-9_-.,&]+$/;
+    projectNameregex = /^([a-zA-Z0-9.,&_-]+)$/;
+    return projectNameregex.test(val);
+}, 'Invalid ProjectName.');
+
 userSchema.path('password').validate((val) => {
-
-    passwordregex= "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}" ;
+    passwordregex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])(([A-Za-z\d@$!%*#?&])\2?(?!\2))+$/;
     return passwordregex.test(val);
-}, 'invalid password pattern');
+}, 'Invalid Password.');
 
-*/
-/*
-function generateSalt() {
-    //return Math.round((new Date().valueOf() * Math.random())) + '';
-    Crypto.randomBytes('256', function(err, buf) {
-        if (err) throw err;
-        return buf;
-    });
-    // return Crypto.randomBytes('256'); // fails to
-}
+userSchema.pre('save', function(next) {
+    var user = this;
 
-userSchema.pre('save', function(next)
-{
-    var crypto = require('crypto');
-    function hashpassword(password, salt) {
-      var sum = crypto.createHash('sha256');
-      var salt = generateSalt();
+    // only hash the password if it has been modified (or is new)
+    if (!user.isModified('password')) return next();
 
-      sum.update(password + salt);
-      return 'sha256$'+ sum.digest('hex');
-    }
-});
+    // generate a salt
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+        if (err) return next(err);
 
-*/
+        // hash the password along with our new salt
+        bcrypt.hash(user.password, salt, function(err, hash) {
+            if (err) return next(err);
 
-
-userSchema.pre('save', function (next) {
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(this.password, salt, (err, hash) => {
-            this.password = hash;
-            this.saltSecret = salt;
+            // override the cleartext password with the hashed one
+            user.password = hash;
             next();
         });
     });
 });
-
 
 mongoose.model('User', userSchema);

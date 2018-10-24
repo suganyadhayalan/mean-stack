@@ -13,7 +13,7 @@ var app = express();
 
 // middleware
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors());//communite tow port nodejs and a
 app.use('/api', rtsIndex);
 
 // error handler
