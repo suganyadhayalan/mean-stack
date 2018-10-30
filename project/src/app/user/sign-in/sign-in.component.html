@@ -2,39 +2,39 @@
   <div class="class heading">
    <h3>Login</h3> 
   </div>
-  <form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)" autocomplete="off">
-    <div class="form-group row">
-      <label for="email-input" class="col-2 col-form-label">Email:</label>
-      <div class="col-4">
-          <input type="text" class="form-control" #email="ngModel" [(ngModel)]="model.email" name="email" placeholder="example@example.com" required [pattern]="emailRegex" [ngClass]="{ 'invalid-textbox' :signInForm.submitted && !email.valid }">
-          <div *ngIf="signInForm.submitted && email.errors">
-            <label *ngIf="email.errors.required" class="validation-message">This field is required.</label>
-            <label *ngIf="email.errors.pattern" class="validation-message">Invalid email address.</label>
-        </div>
+<form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)" autocomplete="off">
+  <div class="form-group row">
+    <label for="email-input" class="col-2 col-form-label">Email:</label>
+    <div class="col-4">
+        <input type="text" class="form-control" #email="ngModel" [(ngModel)]="model.email" name="email" placeholder="example@example.com" required [pattern]="emailRegex" [ngClass]="{ 'invalid-textbox' :signInForm.submitted && !email.valid }">
+        <div *ngIf="signInForm.submitted && email.errors">
+          <label *ngIf="email.errors.required" class="validation-message">This field is required.</label>
+          <label *ngIf="email.errors.pattern" class="validation-message">Invalid email address.</label>
       </div>
     </div>
-    <div class="form-group row">
-      <label for="password-input" class="col-2 col-form-label">Password:</label>
-      <div class="col-4">
-          <input type="password" required [pattern]="passwordregex" class="form-control" #password="ngModel" [(ngModel)]="model.password" name="password" placeholder="********" minlength="8" required [ngClass]="{ 'invalid-textbox' :signInForm.submitted && !password.valid }">
-          <div *ngIf="signInForm.submitted && password.errors">
-            <label *ngIf="password.errors.required" class="validation-message">This field is required.</label>
-            <label *ngIf="password.errors.minlength" class="validation-message">Enter atleast 8 characters.</label>
-            <label *ngIf="password.errors.pattern" class="validation-message">at least 1 uppercase character (A-Z)
-              at least 1 lowercase character (a-z)
-              at least 1 digit (0-9)
-              Not more than two identical characters in a row (e.g., 111 or aaa or AAA not allowed)
-              </label>
-        </div>
+  </div>
+  <div class="form-group row">
+    <label for="password-input" class="col-2 col-form-label">Password:</label>
+    <div class="col-4">
+        <input type="password" required [pattern]="passwordregex" class="form-control" #password="ngModel" [(ngModel)]="model.password" name="password" placeholder="********" minlength="8" required [ngClass]="{ 'invalid-textbox' :signInForm.submitted && !password.valid }">
+        <div *ngIf="signInForm.submitted && password.errors">
+          <label *ngIf="password.errors.required" class="validation-message">This field is required.</label>
+          <label *ngIf="password.errors.minlength" class="validation-message">Enter atleast 8 characters.</label>
+          <label *ngIf="password.errors.pattern" class="validation-message">at least 1 uppercase character (A-Z)
+            at least 1 lowercase character (a-z)
+            at least 1 digit (0-9)
+            Not more than two identical characters in a row (e.g., 111 or aaa or AAA not allowed)
+            </label>
       </div>
     </div>
-    <div class="col">
-      <button type="submit" class="btn btn-primary mb-2" value="Submit">LOGIN</button>
-    </div>
+  </div>
+  <div class="col">
+    <button type="submit" class="btn btn-primary mb-2" value="Submit">LOGIN</button>
+  </div>
 
-   
-  </form>
  
+</form>
+
 
 <div class="alert" *ngIf="serverErrorMessages">{{serverErrorMessages}}</div>
 

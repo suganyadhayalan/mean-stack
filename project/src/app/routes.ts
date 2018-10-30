@@ -2,7 +2,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
+import { LoginsuccessComponent } from './loginsuccess/loginsuccess.component';
 import { NgModule } from '@angular/core';
+import { AuthGuard } from './auth/auth.guard';
 
 const appRoutes: Routes = [
 {
@@ -13,7 +15,10 @@ const appRoutes: Routes = [
     path: 'login', component: SignInComponent
     
 },
-
+{
+    path: 'loginsuccess', component: LoginsuccessComponent,canActivate:[AuthGuard]
+    
+},
 {
     path: 'welcome', component: UserComponent
 },
