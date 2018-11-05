@@ -16,7 +16,7 @@ export class SignUpComponent implements OnInit {
 
   projectNameregex = /^[a-zA-Z0-9.,&_-]+$/;
   fullNameregex = /^[a-zA-Z0-9_]+$/;
-  passwordregex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])(([A-Za-z\d@$!%*#?&])\2?(?!\2))+$/;
+  passwordregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])(([A-Za-z\d@$!%*#?&])\2?(?!\2))+$/;
   
   showSuccessMessage: boolean;
   
@@ -47,7 +47,7 @@ onSubmit(form : NgForm){
      }
      else
      //error in server side
-     this.serverErrorMessages = 'something went wrong in server side';
+     this.serverErrorMessages = 'Error in server side';
 
    }
  );
@@ -59,6 +59,7 @@ resetForm(form: NgForm){
     projectName:'',
     email: '',
     password:'',
+    type_user:'',
   };
   form.resetForm();
   this.serverErrorMessages= '';

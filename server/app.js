@@ -1,6 +1,7 @@
 require('./config/config');
 require('./models/db');
 require('./config/passportConfig');
+require('./controllers/user.controller');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -18,7 +19,7 @@ app.use(cors());//communite two port nodejs and angular
 app.use(passport.initialize());
 app.use('/api', rtsIndex);
 
-// error handler
+// error handle
 app.use((err, req, res, next) => {
     if (err.name === 'ValidationError') {
         var valErrors = [];

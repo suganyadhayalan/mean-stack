@@ -6,7 +6,7 @@ var User = mongoose.model('User');
 passport.use(
     new localStrategy({ usernameField: 'email' },
     (username, password, done) => {
-        //for the authentication purpose email and password to be 
+        //for the authentication purpose email and password 
         User.findOne({ email: username },
             (err, user) => {
                 if (err)

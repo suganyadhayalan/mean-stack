@@ -7,27 +7,32 @@ const jwt = require('jsonwebtoken');
 var userSchema = new mongoose.Schema({
     fullName: {
         type: String,
-        required: 'Full name can\'t be empty',
+        required: 'Full name cannot be empty',
         minlength : [4, 'fullname must be atleast 4 character long'],
         maxlength : [20, 'maximum length below 20 character long']
     },
     projectName: {
         type: String,
-        required: 'Project name can\'t be empty',
+        required: 'Project name cannot be empty',
         minlength : [3, 'projectname must be atleast 3 character long'],
         maxlength : [20, 'maximum length']
     },
     email: {
         type: String,
-        required: 'Email can\'t be empty',
+        required: 'Email cannot be empty',
         unique: true
     },
     password: {
         type: String,
-        required: 'Password can\'t be empty',
+        required: 'Password cannot be empty',
         minlength : [8,'Password must be atleast 8 character long'],
         maxlength : [20]
+    },
+    type_user: {
+        type: String,
+        required: 'type of user cannot to empty'
     }
+
   // saltSecret: String
 });
 
@@ -50,7 +55,7 @@ userSchema.path('projectName').validate((val) => {
 }, 'Invalid ProjectName.');
 
 userSchema.path('password').validate((val) => {
-    passwordregex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])(([A-Za-z\d@$!%*#?&])\2?(?!\2))+$/;
+    passwordregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])(([A-Za-z\d@$!%*#?&])\2?(?!\2))+$/;
     return passwordregex.test(val);
 }, 'Invalid Password.');
 
@@ -89,5 +94,5 @@ userSchema.methods.generateJwt = function(){
 }
 
 
-
-mongoose.model('User', userSchema);
+//mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

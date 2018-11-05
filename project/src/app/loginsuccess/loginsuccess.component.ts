@@ -20,8 +20,7 @@ export class LoginsuccessComponent implements OnInit {
         this.userDetails = res['user'];
       },
       err => { 
-        console.log(err);
-        
+        console.log(err);  
       }
     );
   }

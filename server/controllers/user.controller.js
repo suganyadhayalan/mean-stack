@@ -2,22 +2,63 @@ const mongoose = require('mongoose');
 //build in module mongoose 
 const passport = require('passport');
 const _ = require('lodash');
-
-
 const User = mongoose.model('User'); //userscheme to be import
 
-//register fucntion  help to store the data in database
 
+//register fucntion  help to store the data in database
+/*
+require('../models/user.model');
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useCreateIndex', true);
+*/
 module.exports.register = (req, res, next) => {
     var user = new User();
     user.fullName = req.body.fullName;
     user.projectName = req.body.projectName;
     user.email = req.body.email;
     user.password = req.body.password;
-  
+    user.type_user = req.body.type_user;
+/*
+    if (user.type_user == "ops")
+{
+    console.log("success in ops");
+    //mongoose.connect(process.env.MONGODB_URI2);
+    mongoose.connect(process.env.MONGODB_URI2, (err) => {
+        if (!err) {
+        //successfull connection    
+            console.log('Mongogdb connection successfull in ops db'); 
+        }
+        //error in connection
+        else { 
+            console.log('error in mongodb connection: ' + JSON.stringify(err, undefined, 2));
+        
+        }
+        
+    });
+}
+else
+{
+    console.log(user.type_user);
+    //mongoose.connect(process.env.MONGODB_URI2);
+    mongoose.connect(process.env.MONGODB_URI1, (err) => {
+        if (!err) {
+        //successfull connection    
+            console.log('Mongogdb connection successfull in signup db'); 
+        }
+        //error in connection
+        else { 
+            console.log('error in mongodb connection: ' + JSON.stringify(err, undefined, 2));
+        
+        }
+        
+    });
+}
+*/
     user.save((err, doc) => {
-        if (!err)
+        if (!err){
             res.send(doc);
+            //console.log(user.type_user);
+        }
         else {
             if (err.code == 11000)
                 res.status(422).send(['Duplicate email adrress found.']);//find the duplicate email address

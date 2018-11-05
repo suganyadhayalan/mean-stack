@@ -52,11 +52,30 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="form-group row">
+          <label class="col-2 col-form-label">Type of User</label>
+          <div class="col-4"> 
+         
+        <label class="ratio-inline">  
+              <input type="radio" #type_user="ngModel" [(ngModel)]="userService.selectedUser.type_user" required [ngClass]="{ 'invalid-textbox' :signUpForm.submitted && !type_user.valid }" style="vertical-align: middle; margin: 0px;" name="type_user" value="client" (click)="setradio('client')" #client="ngModel" [(ngModel)]="userService.selectedUser.client">  
+              Client
+          </label> &nbsp; &nbsp; 
+          <label class="ratio-inline">  
+              <input type="radio" #type_user="ngModel" [(ngModel)]="userService.selectedUser.type_user" required [ngClass]="{ 'invalid-textbox' :signUpForm.submitted && !type_user.valid }" name="type_user" style="vertical-align: middle;" value="ops" (click)="setradio('ops')" #ops="ngModel" [(ngModel)]="userService.selectedUser.ops">  
+              OPS
+          </label>  
+          <div *ngIf="signUpForm.submitted && type_user.errors">
+              <label *ngIf="type_user.errors.required" class="validation-message">Select the Type of User</label>
+        
+            </div>
+      </div>  
+    </div> 
+      
+            <div class="col">
         <button type="submit" class="btn btn-primary mb-2" value="Submit">Create Account</button>
       </div>
 
-     
+     <!-- class="btn btn-custom" class="btn btn-primary mb-2" -->
     </form>
     <div class="success" *ngIf="showSuccessMessage">save successfully</div>
 

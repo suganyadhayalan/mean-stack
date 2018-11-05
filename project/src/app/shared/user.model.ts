@@ -3,4 +3,5 @@ export class User {
  projectName: string; 
  email: string;
  password: string;  
+ type_user: string;
 }

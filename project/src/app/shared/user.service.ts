@@ -16,7 +16,8 @@ export class UserService {
     fullName: '',
     projectName: '',
     email: '',
-    password: ''
+    password: '',
+    type_user: ''
   };
 
   noAuthHeader = { headers: new HttpHeaders({ 'NoAuth': 'True' }) };
@@ -26,7 +27,7 @@ export class UserService {
   //http method
   postUser(user: User)
   {
-    return this.http.post(environment.apiBaseUrl+'/register',user,this.noAuthHeader);
+    return this.http.post(environment.apiBaseUrl+'/register', user,this.noAuthHeader);
     //pass the url detail of new user, nodejs-register to be call
   }
 
