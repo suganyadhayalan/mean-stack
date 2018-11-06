@@ -57,11 +57,11 @@
           <div class="col-4"> 
          
         <label class="ratio-inline">  
-              <input type="radio" #type_user="ngModel" [(ngModel)]="userService.selectedUser.type_user" required [ngClass]="{ 'invalid-textbox' :signUpForm.submitted && !type_user.valid }" style="vertical-align: middle; margin: 0px;" name="type_user" value="client" (click)="setradio('client')" #client="ngModel" [(ngModel)]="userService.selectedUser.client">  
+              <input type="radio" #type_user="ngModel" [(ngModel)]="userService.selectedUser.type_user" required [ngClass]="{ 'invalid-textbox' :signUpForm.submitted && !type_user.valid }" style="vertical-align: middle; margin: 0px;" name="type_user" value="client"  #client="ngModel" [(ngModel)]="userService.selectedUser.client">  
               Client
           </label> &nbsp; &nbsp; 
           <label class="ratio-inline">  
-              <input type="radio" #type_user="ngModel" [(ngModel)]="userService.selectedUser.type_user" required [ngClass]="{ 'invalid-textbox' :signUpForm.submitted && !type_user.valid }" name="type_user" style="vertical-align: middle;" value="ops" (click)="setradio('ops')" #ops="ngModel" [(ngModel)]="userService.selectedUser.ops">  
+              <input type="radio" #type_user="ngModel" [(ngModel)]="userService.selectedUser.type_user" required [ngClass]="{ 'invalid-textbox' :signUpForm.submitted && !type_user.valid }" name="type_user" style="vertical-align: middle;" value="ops"  #ops="ngModel" [(ngModel)]="userService.selectedUser.ops">  
               OPS
           </label>  
           <div *ngIf="signUpForm.submitted && type_user.errors">
@@ -75,7 +75,7 @@
         <button type="submit" class="btn btn-primary mb-2" value="Submit">Create Account</button>
       </div>
 
-     <!-- class="btn btn-custom" class="btn btn-primary mb-2" -->
+    
     </form>
     <div class="success" *ngIf="showSuccessMessage">save successfully</div>
 

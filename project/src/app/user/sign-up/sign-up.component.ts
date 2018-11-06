@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class SignUpComponent implements OnInit {
   
-  //email validation
+  //client side validation
   emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   projectNameregex = /^[a-zA-Z0-9.,&_-]+$/;

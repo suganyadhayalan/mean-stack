@@ -4,13 +4,9 @@ const passport = require('passport');
 const _ = require('lodash');
 const User = mongoose.model('User'); //userscheme to be import
 
-
+//console.log("save the data in mongodb");
 //register fucntion  help to store the data in database
 /*
-require('../models/user.model');
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useCreateIndex', true);
-*/
 module.exports.register = (req, res, next) => {
     var user = new User();
     user.fullName = req.body.fullName;
@@ -18,7 +14,14 @@ module.exports.register = (req, res, next) => {
     user.email = req.body.email;
     user.password = req.body.password;
     user.type_user = req.body.type_user;
+    console.log("save the data in mongodb");
+    console.log(user.fullName);
+
 /*
+db connection
+require('../models/user.model');
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useCreateIndex', true);
     if (user.type_user == "ops")
 {
     console.log("success in ops");
@@ -54,7 +57,8 @@ else
     });
 }
 */
-    user.save((err, doc) => {
+/* 
+user.save((err, doc) => {
         if (!err){
             res.send(doc);
             //console.log(user.type_user);
@@ -68,7 +72,7 @@ else
 
     });
 }
-
+*/
 //authentication 
 module.exports.authenticate = (req, res, next) => {
 //call for passport authentication
@@ -92,4 +96,3 @@ module.exports.loginsuccess = (req, res, next) =>{
         }
     );
 }
-
