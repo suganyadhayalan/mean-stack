@@ -4,4 +4,5 @@ export class User {
  email: string;
  password: string;  
  type_user: string;
+ value_flag: boolean;
 }

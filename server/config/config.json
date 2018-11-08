@@ -2,7 +2,7 @@
     "development":{
         "PORT": 3000,
         "MONGODB_URI1": "mongodb://127.0.0.1:27017/signup",
-        "MONGODB_URI2": "mongodb://127.0.0.1:27017/ops",
+        "MONGODB_URI2": "mongodb://127.0.0.1:27017/admin",
         "JWT_SECRET": "SECRET#123",
         "JWT_EXP": "2h"
     },

@@ -24,8 +24,9 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     //once user logged-in into the loginsuccess page, again user go to the login page it directly navigate loginsuccess 
-    if(this.userService.isLoggedIn())
+   /*if(this.userService.isLoggedIn())
     this.router.navigateByUrl('/loginsuccess');
+  */
   }
   
   onSubmit(form : NgForm){

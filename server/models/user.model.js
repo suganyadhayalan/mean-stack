@@ -31,6 +31,10 @@ var userSchema = new mongoose.Schema({
     type_user: {
         type: String,
         required: 'type of user cannot to empty'
+    },
+    value_flag: {
+        type: Boolean,
+        default: false
     }
 
   // saltSecret: String

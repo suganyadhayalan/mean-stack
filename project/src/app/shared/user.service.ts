@@ -25,20 +25,31 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   //http method
-  postUser(user: User)
+  postUser(ops: User)
   {
-    return this.http.post(environment.apiBaseUrl + '/dbconnection', user,this.noAuthHeader);
-    //return this.http.post(environment.apiBaseUrl + '/register', user,this.noAuthHeader);
+    //return this.http.post(environment.apiBaseUrl + '/dbconnection', user,this.noAuthHeader);
+    return this.http.post(environment.apiBaseUrl + '/register', ops,this.noAuthHeader);
     //return this.http.post(environment.apiBaseUrl + '/register' + '/dbconnection', user,this.noAuthHeader);
     //pass the url detail of new user, nodejs-register to be call
   }
+
+
 
   login(authCredentails) {
     return this.http.post(environment.apiBaseUrl + '/authenticate', authCredentails,this.noAuthHeader);
   }
 
+  admin(authCredentails) {
+    return this.http.post(environment.apiBaseUrl + '/authenticate', authCredentails,this.noAuthHeader);
+  }
+
+
   getloginsuccess() {
     return this.http.get(environment.apiBaseUrl + '/loginsuccess');
+  }
+
+  getuserrequest() {
+    return this.http.get(environment.apiBaseUrl + '/userrequest');
   }
 
 

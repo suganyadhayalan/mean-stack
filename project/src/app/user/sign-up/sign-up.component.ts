@@ -39,6 +39,7 @@ onSubmit(form : NgForm){
      //4000sec only show success message to be display 
      setTimeout(() => this.showSuccessMessage = false,4000); 
      this.resetForm(form); // reset form to be call
+     
    },
    err => {
      //error in validation
@@ -60,6 +61,7 @@ resetForm(form: NgForm){
     email: '',
     password:'',
     type_user:'',
+    value_flag:'',
   };
   form.resetForm();
   this.serverErrorMessages= '';

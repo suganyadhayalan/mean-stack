@@ -19,6 +19,8 @@ import { LoginsuccessComponent } from './loginsuccess/loginsuccess.component';
 //authentication
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { AdminComponent } from './user/admin/admin.component';
+import { UserrequestComponent } from './userrequest/userrequest.component';
  
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     SignUpComponent,
     SignInComponent,
     LoginsuccessComponent,
+    AdminComponent,
+    UserrequestComponent,
 
   ],
   imports: [

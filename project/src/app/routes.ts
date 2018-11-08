@@ -3,8 +3,11 @@ import { UserComponent } from './user/user.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { LoginsuccessComponent } from './loginsuccess/loginsuccess.component';
+import { AdminComponent } from './user/admin/admin.component';
+import { UserrequestComponent } from './userrequest/userrequest.component';
 import { NgModule } from '@angular/core';
 import { AuthGuard } from './auth/auth.guard';
+import { from } from 'rxjs';
 
 const appRoutes: Routes = [
 {
@@ -21,6 +24,12 @@ const appRoutes: Routes = [
 },
 {
     path: 'welcome', component: UserComponent
+},
+{
+    path: 'admin', component: AdminComponent
+},
+{
+    path: 'userrequest', component: UserrequestComponent
 },
 {
     path: '', redirectTo: '/welcome', pathMatch: 'full'

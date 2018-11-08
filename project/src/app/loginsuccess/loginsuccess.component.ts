@@ -27,7 +27,7 @@ export class LoginsuccessComponent implements OnInit {
   //logout function
   onLogout(){
     this.userService.deleteToken();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/welcome']);
   }
 
   }
