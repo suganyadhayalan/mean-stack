@@ -12,8 +12,8 @@ router.post('/authenticate', ctrlUser.authenticate);
 
 //private jwt route using verifyJwtToken property
 router.get('/loginsuccess',jwtHelper.verifyJwtToken, ctrlUser.loginsuccess);
-router.post('/userrequest', ctrlUser.userrequest);
-
+router.get('/userrequest', ctrlUser.userrequest);
+router.put('/acceptuser',ctrlUser.acceptuser);
 
 module.exports = router;
 

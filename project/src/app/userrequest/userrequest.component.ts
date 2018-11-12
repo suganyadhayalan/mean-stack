@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/user.service';
-import { Router } from "@angular/router";
 import { User } from '../shared/user.model';
+import { Router } from "@angular/router";
+
 
 
 @Component({
@@ -22,9 +23,27 @@ export class UserrequestComponent implements OnInit {
     err => { 
       console.log(err);  
     }
-  );
- 
+  );}
+  
+  accept(){
+    console.log(this.userrequest);
+    this.userService.acceptuser(this.userrequest).subscribe(
+      req => {
+        this.userrequest;
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
+ /*   this.userService.acceptuser();
+      req => {
+        console.log(req['value']);
+      },
+      err => { 
+        console.log(err);  
+      }
+}*/
 onLogout(){
   this.userService.deleteToken();
   this.router.navigate(['/welcome']);

@@ -8,7 +8,7 @@
 <tbody>
     <tr>
         <td>First Name</td>
-        <td>{{userrequest.fullName.split(' ')[0]}}</td>
+        <td>{{userrequest.fullName}}</td>
     </tr>
     
     <tr>
@@ -25,7 +25,8 @@
 </tr>
     <tr>
         <td colspan="2">
-            <input type="button" class="btn btn-primary mb-2" (click)="accept()" value="accept" />
+            <input type="button" class="btn btn-primary mb-2" (click)="accept()" value="accept" /> &nbsp; &nbsp;
+            <input type="button" class="btn btn-primary mb-2" (click)="ignore()" value="decline" /> &nbsp; &nbsp; 
             <input type="button" class="btn btn-primary mb-2" (click)="onLogout()" value="Logout" />
         </td>
     </tr>

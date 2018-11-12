@@ -20,8 +20,10 @@ passport.use(
                 return done(null, false, { message: 'wrong password' });
 
                 //authentication success
-                else
+                else{
+                    console.log(user);
                 return done(null, user);
+            }
             
             });
     })

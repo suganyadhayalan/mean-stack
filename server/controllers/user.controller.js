@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 //build in module mongoose 
 const passport = require('passport');
 const _ = require('lodash');
-const User = mongoose.model('User'); //userscheme to be import
+User = mongoose.model('User','client'); //userscheme to be import, client collection
 
+//const User1 = mongoose.model('User','ops');  //userscheme to be import, ops collection
 
 //register fucntion  help to store the data in database
 
@@ -28,8 +29,70 @@ module.exports.register = (req, res, next) => {
     });
 }
 
+//accept user
+module.exports.acceptuser = (req, res, next) => { 
+    //var user= new User();
+    //console.log(user);
+    //console.log("success");
+    User.findOneAndUpdate({ fullName: "erowep" },{ $set: { value_flag: 'true' }}, { new: true }, function(err,doc) {
+        if(err) {
+            console.log(err);
+        }
+        else{
+            console.log("something");
+        }});
 
-//authentication 
+ 
+ /*  var user = new User();
+    console.log("succes enter");
+    console.log(user[0].fullName);
+            //console.log(fullName);
+    //return res.status(200).json({ status: true, user : _.pick(user,['fullName','email','projectName','type_user']) });
+
+            };
+
+    var user = new User();
+    user.fullName = res.send.fullName;
+    user.projectName = res.send.projectName;
+    //fullName = user.sendfullName;
+    //value_flag = user.send.value_flag;
+ //   console.log(user.fullName);
+    var fullName = user.res.fullName;
+    var value_flag = user.res.value_flag;
+   // console.log("change the status");
+ //   var query = { fullName: 'sder89' };
+    //console.log(query);
+   //user.findOneAndUpdate({fullName: 'sder89'}, {fullName: 'bar'}).then((updatedDoc) => {})
+
+  //  user.findOneAndUpdate(query, { value_flag: 'true' }); 
+user.findOneAndUpdate(query, { $set: { value_flag: 'true' }}, { new: true, runvalidator: true, rawResult:true }, function(err, doc){
+    if(err){
+        console.log("Error updating data!");
+    }
+    else {
+    console.log("update successfully");
+    console.log(user.value_flag);
+    console.log(doc);
+    res.send(doc);
+    //res.send(doc);
+    }
+
+});
+
+
+
+   
+    user.client.updateOne(
+        { value_flag : false },
+        {
+          $set: { value_flag : true }
+         
+        }
+     );
+*/
+    }; 
+
+//authentication
 module.exports.authenticate = (req, res, next) => {
 //call for passport authentication
     passport.authenticate('local', (err, user, info) => {
@@ -54,13 +117,27 @@ module.exports.loginsuccess = (req, res, next) =>{
 }
 
 module.exports.userrequest = (req, res, next) =>{
-    User.find({},
+    User.findOne({ value_flag: false },
         (err, user) => {
             if (!user)
                 return res.status(404).json({ status: false, message: 'User record not found.' });
             else
+            console.log("succes enter");
+            //console.log(user[0].fullName);//console.log(fullName);
                 return res.status(200).json({ status: true, user : _.pick(user,['fullName','email','projectName','type_user']) });
         }
     );
 }
-
+/*
+//var M = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+mongoose.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("singup");
+  dbo.collection("client").find().limit(5).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+    db.close();
+  });
+}); 
+*/

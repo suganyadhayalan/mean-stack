@@ -61,8 +61,8 @@ resetForm(form: NgForm){
     email: '',
     password:'',
     type_user:'',
-    value_flag:'',
-  };
+    //value_flag: false,
+    };
   form.resetForm();
   this.serverErrorMessages= '';
 }

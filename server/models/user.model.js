@@ -1,3 +1,5 @@
+//database schema
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 SALT_WORK_FACTOR = 10;
@@ -36,9 +38,13 @@ var userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     }
-
-  // saltSecret: String
-});
+},
+    {
+        collection: 'client'
+      },
+      {
+          collection: 'ops'
+      });
 
 // Custom validation for email
 userSchema.path('email').validate((val) => {
@@ -98,5 +104,7 @@ userSchema.methods.generateJwt = function(){
 }
 
 
-mongoose.model('User', userSchema);
-//module.exports = mongoose.model('User', userSchema);
+//mongoose.model('User', userSchema,'client');
+//mongoose.model('User', userSchema,'ops');
+//module.exports = mongoose.model('User', userSchema,'ops');
+module.exports = mongoose.model('User', userSchema,'client');
