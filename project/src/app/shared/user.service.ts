@@ -17,8 +17,7 @@ export class UserService {
     projectName: '',
     email: '',
     password: '',
-    type_user: ''
-   //value_flag: false
+    type_user: '',
   };
 
   noAuthHeader = { headers: new HttpHeaders({ 'NoAuth': 'True' }) };

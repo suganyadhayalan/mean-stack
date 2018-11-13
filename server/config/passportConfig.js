@@ -18,12 +18,14 @@ passport.use(
                 //wrong password
                 else if (!user.verifyPassword(password))
                 return done(null, false, { message: 'wrong password' });
+                
+                //admin has to approve if the value is false
+                else if(user.value_flag===false)
+                return done(null, false, { message: 'Admin has to approve' });
 
                 //authentication success
-                else{
-                    console.log(user);
+                else
                 return done(null, user);
-            }
             
             });
     })
