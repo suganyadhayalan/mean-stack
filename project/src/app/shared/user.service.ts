@@ -17,7 +17,8 @@ export class UserService {
     projectName: '',
     email: '',
     password: '',
-    type_user: '',
+    type_user: ''
+    //value_flag: ''
   };
 
   noAuthHeader = { headers: new HttpHeaders({ 'NoAuth': 'True' }) };
@@ -32,10 +33,15 @@ export class UserService {
     //return this.http.post(environment.apiBaseUrl + '/register' + '/dbconnection', user,this.noAuthHeader);
     //pass the url detail of new user, nodejs-register to be call
   }
+/*
+  postUsers(user: User)
+  {
+    return this.http.post(environment.apiBaseUrl + '/registers', user,this.noAuthHeader);
+  }
+*/
   acceptuser(user: User)
   {
-    return this.http.put(environment.apiBaseUrl + '/acceptuser', user,this.noAuthHeader);
-
+    return this.http.post(environment.apiBaseUrl + '/acceptuser', user,this.noAuthHeader);
   }
   login(authCredentails) {
     return this.http.post(environment.apiBaseUrl + '/authenticate', authCredentails,this.noAuthHeader);
@@ -52,7 +58,18 @@ export class UserService {
   getuserrequest() {
     return this.http.get(environment.apiBaseUrl + '/userrequest');
   }
+  /*
+  getuserrequests(user: User) {
+    return this.http.get(environment.apiBaseUrl + '/userrequests');
+  }
+  */
 
+  /* 
+  getuserrequest() {
+    return this.http.get(environment.apiBaseUrl + '/userrequest');
+  }
+
+  */
   //helper method
   setToken(token: string) {
      localStorage.setItem('token', token);

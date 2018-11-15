@@ -8,12 +8,14 @@ const jwtHelper = require('../config/jwtHelper');
 
 //post in the register function
 router.post('/register', ctrlUser.register);
+//router.post('/registers', ctrlUser.registers);
 router.post('/authenticate', ctrlUser.authenticate);
 
 //private jwt route using verifyJwtToken property
 router.get('/loginsuccess',jwtHelper.verifyJwtToken, ctrlUser.loginsuccess);
 router.get('/userrequest', ctrlUser.userrequest);
-router.put('/acceptuser',ctrlUser.acceptuser);
+//router.post('/userrequests', ctrlUser.userrequests);
+router.post('/acceptuser',ctrlUser.acceptuser);
 
 module.exports = router;
 

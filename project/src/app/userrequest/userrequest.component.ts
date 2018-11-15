@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/user.service';
 import { User } from '../shared/user.model';
 import { Router } from "@angular/router";
+import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import * as io from 'socket.io-client';
+//import { NgForOf } from '@angular/common';
+//import { userInfo } from 'os';
 
 
 
@@ -11,32 +16,59 @@ import { Router } from "@angular/router";
   styleUrls: ['./userrequest.component.css']
 })
 export class UserrequestComponent implements OnInit {
-  userrequest;
+  //userrequest;
+  socket;
+  toDoList;
+  signUpForm;
   //userdetail to be used in the html page
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private http: HttpClient, private router: Router) {
+    this.socket = io();
+   }
 
-  ngOnInit() { this.userService.getuserrequest().subscribe(
+  ngOnInit() {
+    this.getToDos();
+    this.socket.on('update-msg', () => {
+      this.getToDos();
+    })
+  }
+/*
+    this.userService.getuserrequest().subscribe(
     res => {
-      this.userrequest = res['user'];
+      this.signUpForm = res['user'];
     },
     err => { 
       console.log(err);  
     }
-  );}
-  
-  accept(){
-    console.log(this.userrequest);
-    this.userService.acceptuser(this.userrequest).subscribe(
+  );
+*/
+
+getToDos()
+  {
+    this.userService.getuserrequest().subscribe((user) => {
+      this.toDoList = user;
+      console.log("userconnection success gettodo()");
+    });
+
+  }
+
+// accept button function
+  accept(email:any){
+    console.log(email);
+    console.log()
+    this.userService.acceptuser(email).subscribe(
       req => {
-        this.userrequest;
+        this.signUpForm.email;
+        //console.log("enter the acceptfield");
+        //console.log(email);
       },
       err => {
         console.log(err);
       }
     );
   }
- /*   this.userService.acceptuser();
+
+  /*   this.userService.acceptuser();
       req => {
         console.log(req['value']);
       },

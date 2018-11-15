@@ -9,6 +9,7 @@ User = mongoose.model('User','client'); //userscheme to be import, client collec
 //register fucntion  help to store the data in database
 
 module.exports.register = (req, res, next) => {
+    //const io = req.app.get('io');
     var user = new User();
     user.fullName = req.body.fullName;
     user.projectName = req.body.projectName;
@@ -18,8 +19,12 @@ module.exports.register = (req, res, next) => {
   
     user.save((err, doc) => {
         if (!err)
+        {
+           // io.emit('update-msg');
+            //console.log("userconnection success");
             res.send(doc);
-        else {
+        }
+            else {
             if (err.code == 11000)
                 res.status(422).send(['Duplicate email adrress found.']);//find the duplicate email address
             else
@@ -28,21 +33,55 @@ module.exports.register = (req, res, next) => {
 
     });
 }
+/*
+//using socket.io in userrequest page
+module.exports.registers = (req, res, next) => {
+    const io = req.app.get('io');
+    var user = new User();
+  user.fullName = req.body.fullName;
+    user.projectName = req.body.projectName;
+    user.email = req.body.email;
+    user.password = req.body.password;
+    user.type_user = req.body.type_user;
+      user.save((err, doc) => {
+        if (!err)
+        {
+            io.emit('update-msg');
+            console.log("userconnection success in registers");
+            res.send(doc);
+        }
+            else {
+                return next(err);
+        }
+
+    });
+}
+*/
 
 //accept user
 module.exports.acceptuser = (req, res, next) => { 
-    //var user= new User();
+    console.log(req.body);
+    
+    //console.log(query[email]);
+
+    /*
+    user.email = req.body.email;
+    console.log(User.email);
+*/
     //console.log(user);
-    //console.log("success");
-    User.findOneAndUpdate({ fullName: "erowep" },{ $set: { value_flag: 'true' }}, { new: true }, function(err,doc) {
+    //console.log("success"); { email: User.email }
+    User.findOneAndUpdate({ email: "" },{ $set: { value_flag: 'true' }}, { new: true }, function(err,doc) {
         if(err) {
             console.log(err);
         }
         else{
-            console.log("something");
+        console.log("update accept field ");
+            //console.log("no error");
+            //console.log(user.email);
+
         }});
 
- 
+}; 
  /*  var user = new User();
     console.log("succes enter");
     console.log(user[0].fullName);
@@ -90,9 +129,9 @@ user.findOneAndUpdate(query, { $set: { value_flag: 'true' }}, { new: true, runva
         }
      );
 */
-    }; 
+  
 
-//authentication
+//authentication 
 module.exports.authenticate = (req, res, next) => {
 //call for passport authentication
     passport.authenticate('local', (err, user, info) => {
@@ -111,23 +150,59 @@ module.exports.loginsuccess = (req, res, next) =>{
             if (!user)
                 return res.status(404).json({ status: false, message: 'User record not found.' });
             else
-                return res.status(200).json({ status: true, user : _.pick(user,['fullName','email','projectName']) });
+                return res.status(200).json({ status: true, user : _.pick(user,['fullName','email','projectName','type_user']) });
         }
     );
 }
 
+module.exports.userrequest = (req, res, next) =>{
+    //if flag= false then only display the value
+    User.find({value_flag: false},
+        (err, user) => {
+            if (!user)
+                return res.status(404).json({ status: false, message: 'User record not found.' });
+            else 
+            {
+            const io = req.app.get('io');
+            io.emit('update-msg');
+            console.log("userconnection success in userrequest()");    
+            return res.send(user);
+            }
+        }
+    );
+}
+
+/*
+module.exports.userrequests = (req, res, next) =>{
+    User.find({},
+        (err, user) => {
+            if (!user)
+                return res.status(404).json({ status: false, message: 'User record not found.' });
+            else
+            ///console.log("succes enter");
+            //console.log(user[0].fullName);//console.log(fullName);
+                return res.send(user); 
+        
+        }
+    );
+}
+*/
+
+/*
 module.exports.userrequest = (req, res, next) =>{
     User.findOne({ value_flag: false },
         (err, user) => {
             if (!user)
                 return res.status(404).json({ status: false, message: 'User record not found.' });
             else
-            console.log("succes enter");
+            ///console.log("succes enter");
             //console.log(user[0].fullName);//console.log(fullName);
                 return res.status(200).json({ status: true, user : _.pick(user,['fullName','email','projectName','type_user']) });
         }
     );
 }
+*/
+
 /*
 //var M = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";

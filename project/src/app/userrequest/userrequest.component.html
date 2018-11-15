@@ -1,4 +1,53 @@
 <div class="jumbotron">
+    <div class="class heading">
+        <h3>USER REQUEST</h3> 
+       </div>
+       <div class="form-group row">
+         
+  <table *ngFor="let signUpForm of toDoList; let idx = index">
+  <tbody>
+      <tr>
+          <td>{{ idx +1 }} First Name</td>
+          <td>{{signUpForm.fullName}}</td>
+      </tr>
+      <tr>
+          <td>Email</td>
+          <td>{{signUpForm.email}}</td>
+      </tr>
+      <tr>
+        <td>projectname</td>
+        <td>{{signUpForm.projectName}}</td>
+    </tr>
+    <tr>
+      <td>type of user</td>
+      <td>{{signUpForm.type_user}}</td>
+  </tr>
+      <tr>
+          <td colspan="2">
+              <input type="button" class="btn btn-primary mb-2" (click)="accept(signUpForm.email)" value="accept" /> &nbsp; &nbsp;
+               <!-- 
+                   <p>{{ idx +1 }}</p>
+                   <p>{{ signUpForm.fullName}}</p>
+                -->
+                
+              <input type="button" class="btn btn-primary mb-2" (click)="ignore()" value="decline" /> &nbsp; &nbsp; 
+             
+          </td>
+      </tr>
+  </tbody>
+  </table>
+  </div>
+  &nbsp; &nbsp;&nbsp; &nbsp;
+
+  
+  </div>
+
+
+
+
+
+<!-- 
+<div class="jumbotron">
   <div class="class heading">
       <h3>USER REQUEST</h3> 
      </div>
@@ -34,3 +83,4 @@
 </table>
 </div>
 </div>
+ -->
