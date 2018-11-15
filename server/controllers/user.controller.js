@@ -60,7 +60,7 @@ module.exports.registers = (req, res, next) => {
 
 //accept user
 module.exports.acceptuser = (req, res, next) => { 
-    console.log(req.body);
+    //console.log(req.body.email);
     
     //console.log(query[email]);
 
